@@ -58,10 +58,12 @@ export default {
         // await deleteDB("library-store");
         document.cookie = "_session=;max-age=0";
         this.loading = false;
-        this.$router.push('/')
+        
         
       }
-      out().then().catch();
+      out().then(()=> {
+        this.$router.push('/')
+      }).catch();
 
     }
   }
