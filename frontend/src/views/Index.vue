@@ -95,18 +95,6 @@ export default {
 
   },
   mounted() {
-    document.cookie=`name={ 'firstname':'zafir','lastname':'hasan' }`;
-    // document.cookie="name=suhbat;domain=localhost;max-age=86400"
-
-    // let res = this.$http.get("http://localhost:3000/test",{emulateJSON: true, withCredentials: true}).then(()=> {
-
-    //   res = this.$http.get("http://localhost:3000/test",{emulateJSON: true, withCredentials: true}).then().catch();
-
-    // }).catch();
-
-    // let res1 = this.$http.get("http://localhost:3000/me", {emulateJSON: true, withCredentials: true}).then().catch();
-
-    
 
   }
 }

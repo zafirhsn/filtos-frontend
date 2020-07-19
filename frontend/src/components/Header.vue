@@ -56,7 +56,7 @@ export default {
         this.loading = true;
         localStorage.clear();
         // await deleteDB("library-store");
-        document.cookie = "_session=;max-age=0";
+        document.cookie = `_session=;max-age=0;domain=${process.env.VUE_APP_COOKIE_DOMAIN}`;
         this.loading = false;
         
         

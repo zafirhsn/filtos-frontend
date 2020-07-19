@@ -595,7 +595,7 @@ export default {
 				// Else, clear localStorage and push index.vue
 				else {
 					localStorage.clear();
-					document.cookie="_session=;max-age=0"
+					document.cookie=`_session=;max-age=0;domain=${process.env.VUE_APP_COOKIE_DOMAIN}`
 					this.$router.push('/');
 				}
 			}
