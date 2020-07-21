@@ -336,7 +336,7 @@ export default {
           this.loading = false;
           this.error = true;
         }
-        // console.log(res);
+        // //console.log(res);
 
 
         // setTimeout(()=> {

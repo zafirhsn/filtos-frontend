@@ -14,11 +14,11 @@ export default {
         i++;
       }
       await Promise.all([parr]);
-      console.log("Added: ", i);
+      //console.log("Added: ", i);
       await tx.done;
       
       let lib = await db.getAll("library");
-      console.log("Total: ", lib.length);
+      //console.log("Total: ", lib.length);
       let max = 0
       let genreSet = new Set();
       for (let item of lib) {
@@ -35,7 +35,7 @@ export default {
       let genres = [...genreSet.keys()];
       genres.sort();
       let maxBPM  = max;
-      console.log("integrating more data in indexeddb...")
+      //console.log("integrating more data in indexeddb...")
       return {genres, maxBPM}
 
     }

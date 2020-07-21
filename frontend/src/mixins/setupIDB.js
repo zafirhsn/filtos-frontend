@@ -11,7 +11,7 @@ export default {
           }
         }
       })
-      console.log("no populated store")
+      //console.log("no populated store")
       const tx = db.transaction("library", "readwrite");
       const store = tx.objectStore("library");
       let i = 0;
@@ -24,7 +24,7 @@ export default {
       await tx.done;
 
       let lib = await db.getAll("library");
-      console.log("Added: ", lib.length);
+      //console.log("Added: ", lib.length);
       let max = 0
       let genreSet = new Set();
       for (let item of lib) {

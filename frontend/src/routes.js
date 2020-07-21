@@ -6,7 +6,7 @@ export const routes = [
   { path: '/', name: 'index', component: () => import('./views/Index.vue'),
     beforeEnter(to, from, next) {
       let cookies = document.cookie.split("; ");
-      console.log(cookies);
+      //console.log(cookies);
       let parsedCookie = {};
       for (let i of cookies) {
         let index = i.indexOf('=');
@@ -15,7 +15,7 @@ export const routes = [
         parsedCookie[name] = value;
       }
 
-      console.log(parsedCookie);
+      //console.log(parsedCookie);
       if (parsedCookie["_session"]) {
         next('/home')
       } else {
@@ -44,7 +44,7 @@ export const routes = [
       };
 
       let queryParams = getQueryParams(window.location.href);
-      console.log(queryParams);
+      //console.log(queryParams);
 
       let cookies = document.cookie.split("; ");
       let parsedCookie = {};
@@ -54,7 +54,7 @@ export const routes = [
         let value = i.substring(index+1, i.length);
         parsedCookie[name] = value;
       }
-      console.log(parsedCookie);
+      //console.log(parsedCookie);
 
       if (queryParams.code && queryParams.state && queryParams.state === localStorage.getItem("state")) {
         next();
@@ -70,7 +70,7 @@ export const routes = [
   { path: '*', component: () => import('./views/Index.vue'), 
     beforeEnter(to, from, next) {
       let cookies = document.cookie.split("; ");
-      console.log(cookies);
+      //console.log(cookies);
       let parsedCookie = {};
       for (let i of cookies) {
         let index = i.indexOf('=');
@@ -79,7 +79,7 @@ export const routes = [
         parsedCookie[name] = value;
       }
 
-      console.log(parsedCookie);
+      //console.log(parsedCookie);
       if (parsedCookie["_session"]) {
         next('/home')
       } else {

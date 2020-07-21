@@ -137,7 +137,7 @@ export default {
     }
   },
   beforeCreate() {
-    console.log(localStorage.getItem("state"))
+    //console.log(localStorage.getItem("state"))
   },
   created() {
 

@@ -329,17 +329,17 @@ export default {
 				}
 			}
 			this.selected = s;
-			console.log(s);
+			//console.log(s);
 		},
     preview(id, event) {
-      console.log(id, event);
+      //console.log(id, event);
       for (let i = 0; i < this.filteredData.length; i++) { 
         if (id === this.filteredData[i].id) this.filteredData[i].isPreview = true;
         else this.filteredData[i].isPreview = false;
       }
-      console.log(id);
-      console.log(this.selected);
-      // console.log(this.previewBools[id])
+      //console.log(id);
+      //console.log(this.selected);
+      // //console.log(this.previewBools[id])
     },
     applyFilters() {
       this.disabled = true;
@@ -431,7 +431,7 @@ export default {
 			}
 
 			localStorage.setItem("selected", JSON.stringify(ids));
-			console.log(this.selected);
+			//console.log(this.selected);
 		}
   },
   computed: {
@@ -464,7 +464,7 @@ export default {
 
 			// Check url for queryParams, if it exists, we will send it to backend in exchange for access_token 
 			if (Object.keys(queryParams).length && !parsedCookie["_session"]) {
-				console.log("queryParams exist")
+				//console.log("queryParams exist")
 
 				// Open loading screen while data is being requested
 				this.libLoaded = false;
@@ -498,7 +498,7 @@ export default {
 
 				if (!res.next) {
 					let {genres, maxBPM} = await this.setupIDB(data);
-					console.log("No more songs to load next");
+					//console.log("No more songs to load next");
 					this.genres = genres; 
 					this.maxBPM = maxBPM;
 					this.$set(this.bpmFilter, 1, maxBPM);
@@ -508,7 +508,7 @@ export default {
 				}	 
 				// If there are more songs to load, render linear progress for songs and alert the user that the rest of their library will be loaded in the background
 				else {
-					console.log("There's more data to get...");
+					//console.log("There's more data to get...");
 					let next = res.next;
 					this.libLoaded = true;
 					let {genres, maxBPM} = await this.setupIDB(data);
@@ -520,7 +520,7 @@ export default {
 					this.loadedTracks = 2550;
 
 					let tracksLeft = data.total - data.items.length;
-					console.log("These are the tracks left: ", tracksLeft);
+					//console.log("These are the tracks left: ", tracksLeft);
 					let waitTime = Math.ceil(tracksLeft / 2500) * 20 * 1000;
 					let progressInterval = 100 / waitTime;
 
@@ -576,7 +576,7 @@ export default {
 					this.libLoaded = true;
 					// Load library from db and loop through data to set up maxBPM and genres
 					let lib = await db.getAll("library");
-					console.log(lib.length);
+					//console.log(lib.length);
 					let max = 0
 					let genreSet = new Set();
 					for (let item of lib) {
@@ -593,7 +593,7 @@ export default {
 					let genres = [...genreSet.keys()];
 					genres.sort();
 					let maxBPM  = max;
-					console.log("library store is populated, no need to populate")
+					//console.log("library store is populated, no need to populate")
 					this.genres = genres; 
 					this.maxBPM = maxBPM;
 					this.$set(this.bpmFilter, 1, maxBPM);
