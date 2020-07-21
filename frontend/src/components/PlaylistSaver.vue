@@ -229,7 +229,7 @@
                       icon="mdi-alert-circle"
                       rounded
                     >
-                    Something went wrong
+                    Something went wrong :(, please try again later 
                     </v-alert>
 
                     <div v-if="success">
@@ -302,6 +302,7 @@ export default {
       this.saving = false;
       this.loading = true;
       this.success = false;
+      this.error = false;
       this.name = "";
       this.description = "";
     },
@@ -327,10 +328,16 @@ export default {
           tracks: tracks
         }
 
-        let res = await this.$http.post(`${process.env.VUE_APP_BACKEND_URL}/save`, data, {withCredentials: true});
-        console.log(res);
-        this.loading = false;
-        this.success = true;
+        try {
+          let res = await this.$http.post(`${process.env.VUE_APP_BACKEND_URL}/save`, data, {withCredentials: true});
+          this.loading = false;
+          this.success = true;
+        } catch(e) {
+          this.loading = false;
+          this.error = true;
+        }
+        // console.log(res);
+
 
         // setTimeout(()=> {
         //   this.loading = false;

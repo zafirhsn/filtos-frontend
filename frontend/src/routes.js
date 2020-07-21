@@ -56,7 +56,7 @@ export const routes = [
       }
       console.log(parsedCookie);
 
-      if (queryParams.code && queryParams.state) {
+      if (queryParams.code && queryParams.state && queryParams.state === localStorage.getItem("state")) {
         next();
       }
       else if (parsedCookie["_session"]) {

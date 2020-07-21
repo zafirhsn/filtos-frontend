@@ -299,7 +299,7 @@ export default {
       headers: [
         { text: "Preview", align: "start", sortable: false, value: "preview"},
         { text: "Track", align: "start", sortable: true, value:"name" },
-        { text: "Artist", sortable: false, value:"artist"},
+        { text: "Artist", sortable: true, value:"artist"},
         { text: "BPM", sortable: true, value:"bpm"},
 				{ text: "Energy", sortable: true, value: "energy"},
 				{ text: "Popularity", sortable: true, value: "popularity"},
@@ -308,7 +308,7 @@ export default {
       selected: [],
       singleSelect: false,
       search: "",
-			rest: true,
+			rest: false,
 			restProgress: 0,
 			loadedTracks: 0,
 			totalTracks: 0,
@@ -423,6 +423,16 @@ export default {
     }
 	},
   watch: {
+		selected(before, after) {
+			let ids = [];
+			for (let item of this.selected) {
+				if (ids.length >= 100) break;
+				ids.push(item);
+			}
+
+			localStorage.setItem("selected", JSON.stringify(ids));
+			console.log(this.selected);
+		}
   },
   computed: {
   },
@@ -591,6 +601,8 @@ export default {
 					
 					let profile = JSON.parse(localStorage.getItem("profile"));
 					this.profile = profile;
+					let selected = JSON.parse(localStorage.getItem("selected"));
+					this.selected = selected;
 				}
 				// Else, clear localStorage and push index.vue
 				else {
