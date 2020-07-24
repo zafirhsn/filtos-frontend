@@ -1,5 +1,5 @@
 <template>
-  <v-container class="px-sm-10" id="root-container" fluid>
+  <v-container class="px-sm-10" id="root-container" fluid ref="root">
 
 		<comp-error v-if="error" :errorMessage=errorMessage></comp-error>
 
@@ -87,7 +87,7 @@
 						</v-row>
 
 						<!-- BPM Filter -->
-						<v-row class="justify-center">
+						<v-row class="justify-center mb-5">
 							<v-col>
 								<v-range-slider 
 									v-model="bpmFilter" 
@@ -97,7 +97,7 @@
 									:color=css.main
 									track-color="#85219650"
 									:thumb-color=css.main
-									thumb-label="always" 
+									thumb-label="always"
 									class="mt-3" 
 									:disabled="disabled"> 
 								</v-range-slider>
@@ -108,7 +108,7 @@
 						</v-row>
 
 						<!-- Energy Filter -->
-						<v-row class="justify-center">
+						<v-row class="justify-center mb-5">
 							<v-col>
 								<v-range-slider 
 									v-model="energyFilter" 
@@ -119,14 +119,22 @@
 									:color=css.main
 									track-color= "#85219650"
 									:thumb-color=css.main
-									step="0.01" 
+									step=0.25
+									ticks="always"
+									tick-size="4"
+									:tick-labels="tickLabels"
 									:disabled="disabled"> 
+
+								<!-- <template v-slot:thumb-label="{value}">
+									<span v-if="value = 0">Lowest</span>
+
+								</template> -->
 								</v-range-slider>
 							</v-col>
 						</v-row>
 
 						<!-- Popularity Filter -->
-							<v-row class="justify-center">
+							<v-row class="justify-center mb-5">
 								<v-col>
 									<v-range-slider 
 										v-model="popularityFilter" 
@@ -137,13 +145,17 @@
 										:color=css.main
 										track-color= "#85219650"
 										:thumb-color=css.main
+										step=25
+										ticks="always"
+										tick-size="4"
+										:tick-labels="tickLabels"
 										:disabled="disabled"> 
 									</v-range-slider>
 								</v-col>
 							</v-row>
 
 						<!-- Danceability Filter -->
-							<v-row class="justify-center">
+							<v-row class="justify-center mb-5">
 								<v-col>
 									<v-range-slider 
 										v-model="danceabilityFilter" 
@@ -154,14 +166,38 @@
 										:color=css.main
 										track-color= "#85219650"
 										:thumb-color=css.main
-										step="0.01"
+										step=0.25
+										ticks="always"
+										tick-size="4"
+										:tick-labels="tickLabels"
+										:disabled="disabled"> 
+									</v-range-slider>
+								</v-col>
+							</v-row>
+
+						<!-- Valence Filter -->
+							<v-row class="justify-center mb-5">
+								<v-col>
+									<v-range-slider 
+										v-model="valenceFilter" 
+										label="Valence" 
+										min="0" 
+										max="1" 
+										thumb-label="always"
+										:color=css.main
+										track-color= "#85219650"
+										:thumb-color=css.main
+										step=0.25
+										ticks="always"
+										tick-size="4"
+										:tick-labels="tickLabels"
 										:disabled="disabled"> 
 									</v-range-slider>
 								</v-col>
 							</v-row>
 
 						<!-- Apply Filters Button -->
-						<v-row class="justify-center">
+						<v-row class="justify-center mb-5">
 							<v-col align="center" sm=6 md=4 lg=2>
 
 							<v-btn 
@@ -287,11 +323,13 @@ export default {
     return {
 			libLoaded: false,
 			progress:0,
+			tickLabels: ["Lowest", "Low", "Average", "High", "Highest"],
       genreFilters: [],
       bpmFilter: [0,0],
 			energyFilter: [0,1],
 			popularityFilter: [0,100],
 			danceabilityFilter: [0,1],
+			valenceFilter: [0,1],
       filteredData: [],
       maxBPM: 0,
       genres: [],
@@ -303,7 +341,8 @@ export default {
         { text: "BPM", sortable: true, value:"bpm"},
 				{ text: "Energy", sortable: true, value: "energy"},
 				{ text: "Popularity", sortable: true, value: "popularity"},
-        { text: "Danceability", sortable: true, value: "danceability"}
+				{ text: "Danceability", sortable: true, value: "danceability"},
+				{ text: "Valence", sortable: true, value: "valence"}
       ],
       selected: [],
       singleSelect: false,
@@ -318,6 +357,9 @@ export default {
     }
   },
   methods: {
+		resize() {
+			console.log(window.screen);
+		},
 		clearSelected() {
 			this.selected = [];
 		},
@@ -353,7 +395,8 @@ export default {
 						this.genreChecker(item.genres, this.genreFilters) &&
 						this.featureChecker(Math.round(item.features.tempo), this.bpmFilter) && this.featureChecker(item.features.energy, this.energyFilter) &&
 						this.featureChecker(item.popularity, this.popularityFilter) &&
-						this.featureChecker(item.features.danceability, this.danceabilityFilter)
+						this.featureChecker(item.features.danceability, this.danceabilityFilter) &&
+						this.featureChecker(item.features.valence, this.valenceFilter)
 						) {
 						
 						let artists = item.artists.reduce((str, artist)=> {return str += `${artist.name}, `}, "");
@@ -366,7 +409,8 @@ export default {
 								bpm: item.features.tempo, 
 								energy: item.features.energy,
 								popularity: item.popularity,
-                danceability: item.features.danceability, 
+								danceability: item.features.danceability, 
+								valence: item.features.valence,
                 preview_url: item.preview_url,
                 isPreview: false 
               })
@@ -446,7 +490,21 @@ export default {
 		When this component is entered, we know a few things. 
 		1. There are either queryParams in the url with two (code, state) and cookie may or may not exist
 		2. There are no queryparams, but the session cookie is valid
-		*/
+		*/		
+		console.log(this.$refs);
+		window.addEventListener("resize", ()=> {
+			if (window.screen.width < 650) {
+				this.tickLabels = [];
+			} else {
+				this.tickLabels = ["Lowest", "Low", "Average", "High", "Highest"]
+			}
+		})
+		if (window.screen.width < 650) {
+			this.tickLabels = [];
+		} else {
+			this.tickLabels = ["Lowest", "Low", "Average", "High", "Highest"]
+		}
+
 	
 		let setup = async () => {
 
@@ -622,7 +680,10 @@ export default {
 			}
 		});
 
-  }
+	},
+	beforeUpdate() {
+
+	}
 }
 </script>
 

@@ -1,60 +1,74 @@
 <template>
 <v-container fluid class="gradient" id="root-container">
-  <v-app-bar
+  <!-- <v-app-bar
     app
     prominent
-    :color="css.main"
+    color="white"
     elevate-on-scroll
   >
-  <v-row class="justify-center mt-5">
+    <v-row class="justify-center" no-gutters>
+      <v-col align="">
+      
+
+        <img src="../assets/logo.png" class="mt-5" id="logo">
+        <span class="d-inline-block" id="heading">Filtos</span>
+
+      </v-col>
+    </v-row>
+  
+  </v-app-bar> -->
+
+
+  <v-row class="mt-10">  
     <v-col align="center">
-
-    <img src="../assets/logo.png" style="display:inline-block" id="logo">
-    <h1 class=" d-inline-block white--text" id="heading">Filtos</h1>
-
+      <img src="../assets/logo.png" style="display:inline-block" id="logo"><h1 id="heading" class="">Filtos</h1>
     </v-col>
   </v-row>
-  
-  </v-app-bar>
 
+  <v-row class="my-sm-10 justify-center px-md-10">
+    <v-col align="center" sm=8 lg=4 xl=3 class="mt-10">
 
-  <!-- <v-row class="my-10">  
-    <v-col align="center">
-      <img src="../assets/logo.png" style="display:inline-block" id="logo"><h1 id="heading">Filtos</h1>
-    </v-col>
-  </v-row> -->
-
-  <v-row class="my-10 justify-center">
-    <v-col align="center" sm=12 lg=3 xl=2 class="mt-10">
-      <p class="landing-copy">1. <strong>Filter</strong> your songs based on given attributes</p>
-      <v-img src="../assets/filter-crop2.png" alt="Filter component" 
-        height="20rem"
-        width="20rem"
-        contain
-        class="d-block mb-5 mb-sm-10 rounded"
-      ></v-img>
+      <v-sheet
+        elevation=0
+        class="pa-8"
+        rounded
+        color="rgb(133,33,150,0.3)"
+      >
+        <p class="landing-copy">1. <strong>Filter</strong> your songs based on given attributes</p>
+        <img src="../assets/filter-crop2.png" alt="Filter component" 
+          class="d-block mb-5 mb-sm-10 rounded elevation-15"
+        >
+      </v-sheet>
 
     </v-col>
 
-    <v-col align="center" sm=12 lg=3 xl=2 class="mt-10">
-      <p class="landing-copy">2. <strong>Select</strong> the songs you want to save</p>
-      <v-img src="../assets/select-crop.png" alt="Filter component" 
-        height="20rem"
-        width="20rem"
-        contain
-        class="d-block mb-5 mb-sm-10 rounded"
-      ></v-img>
+    <v-col align="center" sm=8 lg=4 xl=3 class="mt-10">
+      <v-sheet
+        elevation=0
+        class="pa-8"
+        color="rgb(133,33,150,0.3)"
+        rounded
+      >
+        <p class="landing-copy">2. <strong>Select</strong> the songs you want to save</p>
+        <img src="../assets/select-crop.png" alt="Filter component" 
+          class="d-block mb-5 mb-sm-10 rounded elevation-15"
+        >
+      </v-sheet>
 
     </v-col>
 
-    <v-col align="center" sm=12 lg=3 xl=2 class="mt-10">
-      <p class="landing-copy">3. <strong>Save</strong> your songs to a playlist and enjoy</p>
-      <v-img src="../assets/save-crop2.png" alt="Filter component" 
-        height="20rem"
-        width="20rem"
-        contain
-        class="d-block mb-5 mb-sm-10 rounded"
-      ></v-img>
+    <v-col align="center" sm=8 lg=4 xl=3 class="mt-10">
+      <v-sheet
+        elevation=0
+        class="pa-8"
+        color="rgb(133,33,150,0.3)"
+        rounded
+      >
+        <p class="landing-copy">3. <strong>Save</strong> your songs to a playlist and enjoy</p>
+        <img src="../assets/save-crop2.png" alt="Filter component" 
+          class="d-block mb-5 mb-sm-10 rounded elevation-15"
+        >
+      </v-sheet>
     </v-col>
 
   </v-row>
@@ -68,8 +82,9 @@
         <li><span class="highlight">Energy</span> - Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. A value of 1.0 is most energetic and 0.0 is least energetic</li>
         <li><span class="highlight">Popularity</span> - The popularity of a track is a value between 0 and 100, with 100 being the most popular. The popularity is based, in the most part, on the total number of plays the track has had and how recent those plays are.</li>
         <li><span class="highlight">Danceability</span> - Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable. </li>
-        <li><span class="highlight">More coming soon...</span></li>
+        <li><span class="highlight">Valence</span> - 	A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry). </li>
       </ol>
+      <span class="d-inline-block mt-10">Read more about song attributes at <a href="https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/">Spotify</a></span>
     </v-col>
   </v-row>
 
@@ -168,23 +183,42 @@ export default {
   }
 
   #heading {
-    font-weight: 500;
-    font-size: 2rem;
+    font-weight: 400;
+    font-size: 3.5rem;
+
+    @media screen and (min-width: 700px) {
+      font-size: 5rem;
+    }
+
   }
 
-  #connect-button {
+  #logo {
+    height: 5rem;
+    
+    @media screen and (min-width: 700px) {
+      height:6rem;
+    }
+  }
+
+    #connect-button {
     font-size: 1rem;
     font-weight: 700;
   }
 
-  #logo {
-    height: 3rem;
-  }
 
-  div.v-image.v-responsive.d-block.mb-5.mb-sm-10.rounded.theme--light {
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
+  img.d-block.mb-5.mb-sm-10.rounded.elevation-15 {
+    width: 20rem;
+    height: auto;
+
+    @media screen and (min-width: 0px) {
+      height: 15rem;
+      width: auto;
+    }
+
+    @media screen and (min-width: 800px) {
+      height: 18rem;
+      width: auto;
+    }
   }
 
   .landing-copy {
