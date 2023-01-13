@@ -28,6 +28,7 @@ export default {
       let max = 0
       let genreSet = new Set();
       for (let item of lib) {
+        if (item.features === null) continue;
         if (item.features.tempo > max) {
           max = item.features.tempo; 
         }
