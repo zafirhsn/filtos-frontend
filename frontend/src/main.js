@@ -5,6 +5,16 @@ import {routes} from './routes';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import VueMeta from 'vue-meta';
+import Bugsnag from '@bugsnag/js';
+import BugsnagPluginVue from '@bugsnag/plugin-vue';
+
+Bugsnag.start({
+  apiKey: "5b9fda594cdcd91241a901fb6870b9e1",
+  plugins: [new BugsnagPluginVue()]
+})
+
+const bugsnagVue = Bugsnag.getPlugin('vue');
+bugsnagVue.installVueErrorHandler(Vue);
 
 Vue.config.productionTip = false
 

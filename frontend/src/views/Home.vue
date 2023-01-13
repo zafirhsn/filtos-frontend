@@ -421,6 +421,7 @@ export default {
       update().then(()=>{
 				this.disabled = false;
 			}).catch(e => {
+				Bugsnag.notify(e);
 				this.error = true;
 				if (e.status === 429) {
 					this.errorMessage = "Looks like we're busy right now, please try again later!"
@@ -665,6 +666,7 @@ export default {
 				// Else, clear localStorage and push index.vue
 				else {
 					localStorage.clear();
+					// TODO: Don't set cookie domain for dev env
 					document.cookie=`_session=;max-age=0;domain=${process.env.VUE_APP_COOKIE_DOMAIN}`
 					this.$router.push('/');
 				}
@@ -672,6 +674,7 @@ export default {
 		}
 
 		setup().then().catch(e => {
+			Bugsnag.notify(e);
 			this.error = true;
 			if (e.status === 429) {
 				this.errorMessage = "Looks like we're busy right now, please try again later!"
