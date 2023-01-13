@@ -391,6 +391,7 @@ export default {
         let lib = await db.getAll("library");
 				this.filteredData = [];
         for (let item of lib) {
+					if (typeof item.features === "undefined") continue;
           if (
 						this.genreChecker(item.genres, this.genreFilters) &&
 						this.featureChecker(Math.round(item.features.tempo), this.bpmFilter) && this.featureChecker(item.features.energy, this.energyFilter) &&
