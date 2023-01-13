@@ -15,6 +15,7 @@ Bugsnag.start({
 
 const bugsnagVue = Bugsnag.getPlugin('vue');
 bugsnagVue.installVueErrorHandler(Vue);
+window.Bugsnag = Bugsnag;
 
 Vue.config.productionTip = false
 
