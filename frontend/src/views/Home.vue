@@ -551,7 +551,6 @@ export default {
 	created() {
 	},
   mounted() {
-		return;
 		/* 
 		When this component is entered, we know a few things. 
 		1. There are either queryParams in the url with two (code, state) and cookie may or may not exist
