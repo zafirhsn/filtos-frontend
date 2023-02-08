@@ -3,7 +3,7 @@
 
 		<comp-error v-if="error" :errorMessage=errorMessage></comp-error>
 
-		<v-container fluid v-if="true || !libLoaded || !error" id="loader-container">
+		<v-container fluid v-if="!libLoaded && !error" id="loader-container">
 			<v-row class="justify-center" id="loader-row">
 				<v-col align="center" align-self="center">
 
@@ -18,7 +18,14 @@
 				</v-col>
 			</v-row>
 
+			<v-row v-if="progress >=100">
+				<v-col>
+				<p class="text-center">Your songs are still being loaded in the background...</p>
+				</v-col>
+			</v-row>
 			<v-row class="justify-center">
+
+
 				<v-col md="6">
 					<v-card
 						elevation="24"
@@ -57,7 +64,7 @@
 			</v-row>
 		</v-container>
 
-		<v-container fluid v-if="false && libLoaded && !error" id="main-container">
+		<v-container fluid v-if="libLoaded && !error" id="main-container">
 			<comp-header
 				:profile=profile
 			></comp-header>
@@ -544,6 +551,7 @@ export default {
 	created() {
 	},
   mounted() {
+		return;
 		/* 
 		When this component is entered, we know a few things. 
 		1. There are either queryParams in the url with two (code, state) and cookie may or may not exist
