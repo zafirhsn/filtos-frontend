@@ -597,7 +597,7 @@ export default {
 						clearInterval(interval)
 						this.progress = 100;
 					}
-				}, 160)
+				}, 250)
 
 				// let res = split1;
 				// await timeout(15000);
