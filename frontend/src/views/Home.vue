@@ -3,7 +3,7 @@
 
 		<comp-error v-if="error" :errorMessage=errorMessage></comp-error>
 
-		<v-container fluid v-if="!libLoaded && !error" id="loader-container">
+		<v-container fluid v-if="true || !libLoaded || !error" id="loader-container">
 			<v-row class="justify-center" id="loader-row">
 				<v-col align="center" align-self="center">
 
@@ -17,9 +17,47 @@
 			</v-progress-circular>
 				</v-col>
 			</v-row>
+
+			<v-row class="justify-center">
+				<v-col md="6">
+					<v-card
+						elevation="24"
+						class="mx-auto rounded-lg"
+					>
+						<v-carousel
+							:continuous="true"
+							:cycle="true"
+							:show-arrows="false"
+							:hide-delimiters="true"
+							height="250"
+						>
+							<v-carousel-item
+								v-for="(fact, i) in slideFacts"
+								:key="i"
+								class="align-center"
+								>
+								<v-sheet
+									height="100%"
+									class="d-flex align-center pa-4"
+									:color="colors[i] + ' lighten-5'"
+									tile
+								>
+									<v-row>
+										<v-col>
+											<div class="text-h5 font-italic text-center my-auto pa-4">
+												{{ fact }}
+											</div>
+										</v-col>
+									</v-row>
+								</v-sheet>
+							</v-carousel-item>
+						</v-carousel>
+					</v-card>
+				</v-col>
+			</v-row>
 		</v-container>
 
-		<v-container fluid v-if="libLoaded && !error" id="main-container">
+		<v-container fluid v-if="false && libLoaded && !error" id="main-container">
 			<comp-header
 				:profile=profile
 			></comp-header>
@@ -353,7 +391,25 @@ export default {
 			totalTracks: 0,
 			profile: {},
 			error: false,
-			errorMessage: ""
+			errorMessage: "",
+			slideFacts: [
+				"Techno helped unite east and west Germany",
+				"Hip hop was founded in the South Bronx",
+				"Radiohead was the first major band debuting a pay what you want method for an album release",
+				"House music derives its name from the original club called warehouse",
+				"Rappers Delight was the first hip hop song released on the radio",
+				"Brian Eno was the founder of ambient music",
+				"None of the Beatles could write or read music",
+				"The most expensive musical instrument sold for $15.9 million",
+				"A single violin is made from over 70 individual pieces of wood",
+				"Prince Played 27 Instruments on His Debut Album",
+				"Dogfish skin was often used in the 18th century to sand violins",
+				"In 2016, Mozart sold more CDs than Beyoncé",
+				"Finland has the most metal bands per capita",
+				"'Jingle Bells' Was Originally a Thanksgiving Song",
+				"There are more people in Monaco’s orchestra than in its army",
+			],
+			colors: [ "red", "purple", "green", "deep-purple", "indigo", "blue", "cyan", "lime", "yellow", "orange"]
     }
   },
   methods: {
@@ -704,7 +760,7 @@ export default {
 }
 
 #loader-row {
-	height: 100%
+	height: 50%;
 }
 
 /* #main {
