@@ -416,7 +416,7 @@ export default {
 				"'Jingle Bells' Was Originally a Thanksgiving Song",
 				"There are more people in Monaco’s orchestra than in its army",
 			],
-			colors: [ "red", "purple", "green", "deep-purple", "indigo", "blue", "cyan", "lime", "yellow", "orange"]
+			colors: [ "cyan", "red", "purple", "green", "orange" , "indigo", "blue", "lime", "yellow", "deep-purple", ]
     }
   },
   methods: {
